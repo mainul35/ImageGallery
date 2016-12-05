@@ -1,0 +1,59 @@
+<script type="text/javascript">
+    $(document).ready(function () {
+
+        $('#emailid').focusout(function () {
+//            alert("Invalid email");
+            $('#emailid').filter(function () {
+                var emil = $('#emailid').val();
+                var emailReg = /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/;
+                if (!emailReg.test(emil)) {
+                    $('#emailid').addClass("glowing-border-error");
+                    $('#email_message').text("Invalid Email");
+                } else {
+                    $('#emailid').removeClass("glowing-border-error");
+                    $('#email_message').text("");
+                }
+            })
+        });
+    });
+
+    $(document).ready(function () {
+        $('#password').focusout(function () {
+            if ($('#password').val().length < 6) {
+                $('#pass_message').text("Password length is too short.");
+                $('#password').addClass("glowing-border-error");
+            } else if ($('#password').val().length > 5) {
+                $('#pass_message').text("");
+                $('#password').removeClass("glowing-border-error");
+            }
+        });
+    });
+
+</script>
+<div class="loginPane">
+    <div class="login-form">
+        <div>
+            <h1>YOU CAN SIMPLY LOG IN FROM HERE</h1>
+        </div>
+        <form method="post" action="controller/loginController.php">
+            <table class="form-field">
+                <tbody>
+                    <tr>
+                        <td><label for="email">Email</label></td>
+                        <td><input id="emailid" class="glowing-border" type="text" name="email"/></td>
+                        <td><span id="email_message"></span></td>
+                    </tr>
+                    <tr>
+                        <td><label for="password">Password</label></td>
+                        <td><input id="password" class="glowing-border" type="password" name="password"/></td>
+                        <td><span id="pass_message"></span></td>
+                    </tr>
+                    <tr>
+                        <td colspan="2"><input type="submit" value="Log in" /></td>
+                        <td><a id="pasword_reset" href="#">Reset password</a></td>
+                    </tr>
+                </tbody>
+            </table>
+        </form>
+    </div>
+</div>

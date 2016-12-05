@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project-private xmlns="http://www.netbeans.org/ns/project-private/1">
+    <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
+    <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
+        <group>
+            <file>file:/E:/xampp/htdocs/ImageGallery/controller/registrationController.php</file>
+            <file>file:/E:/xampp/htdocs/ImageGallery/controller/GalleryDAO.php</file>
+            <file>file:/E:/xampp/htdocs/ImageGallery/js/jquery-3.1.1.min.js</file>
+            <file>file:/E:/xampp/htdocs/ImageGallery/index.php</file>
+            <file>file:/E:/xampp/htdocs/ImageGallery/model/user.php</file>
+            <file>file:/E:/xampp/htdocs/ImageGallery/db/connection.php</file>
+            <file>file:/E:/xampp/htdocs/ImageGallery/util/gridview.html</file>
+            <file>file:/E:/xampp/htdocs/ImageGallery/css/style.css</file>
+            <file>file:/E:/xampp/htdocs/ImageGallery/util/index_content.html</file>
+            <file>file:/E:/xampp/htdocs/ImageGallery/userpanel/home.php</file>
+            <file>file:/E:/xampp/htdocs/ImageGallery/controller/LoginDAO.php</file>
+            <file>file:/E:/xampp/htdocs/ImageGallery/controller/loginController.php</file>
+            <file>file:/E:/xampp/htdocs/ImageGallery/util/registrationPane.html</file>
+            <file>file:/E:/xampp/htdocs/ImageGallery/util/loginPane.html</file>
+            <file>file:/E:/xampp/htdocs/ImageGallery/util/footer.html</file>
+            <file>file:/E:/xampp/htdocs/ImageGallery/util/header.php</file>
+            <file>file:/E:/xampp/htdocs/ImageGallery/js/script.js</file>
+            <file>file:/E:/xampp/htdocs/ImageGallery/model/image.php</file>
+        </group>
+    </open-files>
+</project-private>

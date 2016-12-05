@@ -1,0 +1,209 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : Dec 1, 2016, 3:47:37 AM
+    Author     : Mainul35
+*/
+
+.navbar{
+    border-radius: 0px;
+    font-family: aref-font;
+}
+
+/*index_content page*/
+*{
+    margin: 0px;
+    padding: 0px;
+    border: 0px;
+}
+
+.jumbotron{
+    width: 1360px;
+    margin-left: -14px;
+    height: 460px;
+}
+.jumbotron p, h1{
+    margin-bottom: 15px;
+    font-size: 50px;
+    font-weight: 200;
+    text-align: center;
+    margin-top: 65px;
+}
+
+.container .jumbotron, .container-fluid{
+    border-radius: 0px;
+}
+.container {
+    width: 100%;
+    margin-top: -20px;
+    margin-left: -12px;
+}
+
+/*Register page*/
+.registerPane{
+    background-color: rgba(93, 64, 183, 0.75);
+    width: 1363px;
+    height: 390px;
+    position: relative;
+    margin-left: -14px;
+    margin-top: -65px;
+    color: #ffffff;
+    height: 500px;
+    font-family: FontleroyBrown;
+}
+
+.register-form{
+    display: block;
+    margin-right: auto;
+    position: relative;
+    top: 32%;
+    margin-left: 0%;
+}
+
+.register-form > div > h1{
+    font-weight: 100;
+    font-family: FontleroyBrown;
+    word-spacing: 10px;
+    text-align: center;
+}
+form{
+    margin-top: 25px;
+    margin-left: 120px;
+    font-family: Bistecca;
+    line-height: 35px;
+}
+
+table{
+    margin-left: 32%;
+}
+label{
+    line-height: 30px;
+}
+
+/*Login Page*/
+.loginPane{
+    background-color: #337ab7;
+    width: 1363px;
+    height: 390px;
+    position: relative;
+    margin-left: -14px;
+    margin-top: -95px;
+    color: #ffffff;
+}
+
+.login-form{
+    display: block;
+    margin-right: auto;
+    position: relative;
+    top: 40%;
+    margin-left: 0%;
+}
+
+.login-form > div > h1{
+    font-weight: 100;
+    font-family: FontleroyBrown;
+    word-spacing: 10px;
+    text-align: center;
+}
+
+input{
+    font-family: "Arial";
+    letter-spacing: 1px;
+    font-weight: 100;
+    margin-left: 20px;
+    line-height: 20px;
+    width: 200px;
+    height: 25px;
+    padding: 1px;
+    color: #000;
+}
+
+input[type="submit"]{
+    font-family: Bistecca;
+    width: 122px;
+    height: 30px;
+    background-color: #1E90FF;
+    border-color: #1E90FF;
+    border-radius: 5px;
+    color: white;
+    font-weight: 600;
+    margin-left: 0px;
+    margin-top: 8px;
+}
+
+#footer{
+    background: #000;
+    color: #ccc;
+    text-align: center;
+    padding: 10px;
+}
+
+.glowing-border {
+    border: 2px solid #dadada;
+    border-radius: 4px;
+}
+
+.glowing-border:focus { 
+    outline: none;
+    border-color: #9ecaed;
+    box-shadow: 0 0 10px #9ecaed;
+}
+
+.glowing-border-error{
+    border: 2px solid rgba(225, 0, 0, 0.3);
+    outline: none;
+    border-color: rgba(225, 0, 0, 0.3);
+    box-shadow: 0 0 10px rgba(225, 0, 0, 0.3);
+}
+
+.glowing-border-normal{
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    outline: none;
+    border-color: rgba(255, 255, 255, 0.3);
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+}
+
+#pasword_reset{
+    color: #fcf8e3;
+    text-decoration: none;
+    margin-left: -75px;
+}
+
+@font-face {
+    font-family: CoventryGarden;
+    src: url(../resources/fonts/CoventryGardenNF.ttf);
+}
+
+@font-face {
+    font-family: Bistecca;
+    src: url(../resources/fonts/Bistecca.ttf);
+}
+
+@font-face {
+    font-family: DobkinScript;
+    src: url(../resources/fonts/DobkinScript.ttf);
+}
+
+@font-face {
+    font-family: FontleroyBrown;
+    src: url(../resources/fonts/FontleroyBrownNF.ttf);
+}
+
+@font-face {
+    font-family: aref-font;
+    src: url(../resources/fonts/arefruqaa-bold.ttf);
+}
+
+/*Grid view*/
+.col-sm-1 {
+    width: 19.333333%;
+    margin: 10px;
+}
+
+.row {
+    margin-right: auto;
+    margin-left: 180px;
+}
