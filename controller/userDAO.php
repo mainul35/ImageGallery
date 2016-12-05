@@ -21,16 +21,19 @@ class UserDAO {
                 $userId = $row['id'];
                 $fName = $row["fName"];
                 $lName = $row["lName"];
-                $user = new User($fName, $lName, $email, $password);
-                $user->setId($userId);
-                session_start();
-                $_SESSION['user'] = $user;
-                $_SESSION['loggedIn'] = TRUE;
+                $psw = $row["password"];
+                if ($password == $psw) {
+                    $user = new User($fName, $lName, $email, $password);
+                    $user->setId($userId);
+                    session_start();
+                    $_SESSION['user'] = $user;
+                    $_SESSION['loggedIn'] = TRUE;
+                    return true;
+                }
             }
 
             /* free result set */
             $result->free();
-            return true;
         } else {
             return FALSE;
         }
@@ -55,7 +58,7 @@ class UserDAO {
                             echo "Execute failed: (" . $stmt->errno . ") " . $stmt->error;
                             $b = FALSE;
                         }
-                    }else{
+                    } else {
                         echo 'Password length is too short. It must be 6 characters long.<br>';
                         $b = FALSE;
                     }

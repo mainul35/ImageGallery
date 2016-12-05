@@ -1,3 +1,40 @@
+<script>
+    $(document).ready(function () {
+
+        $('#registration-emailid').focusout(function () {
+            $('#registration-emailid').filter(function () {
+                var emil = $('#registration-emailid').val();
+                var emailReg = /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/;
+                if (!emailReg.test(emil)) {
+                    $('#registration-emailid').addClass("glowing-border-error");
+                    $('#registration-email_message').text("Invalid Email");
+                } else {
+                    $('#registration-emailid').removeClass("glowing-border-error");
+                    $('#registration-email_message').text("");
+                }
+            })
+        });
+
+        $('#registration-password').focusout(function () {
+            if ($('#registration-password').val().length < 6) {
+                $('#registration-pass_message').text("Password length is too short.");
+                $('#registration-password').addClass("glowing-border-error");
+            } else if ($('#registration-password').val().length > 5) {
+                $('#registration-pass_message').text("");
+                $('#registration-password').removeClass("glowing-border-error");
+            }
+        });
+
+        $('#registration-submit').click(function () {
+            var emil = $('#registration-emailid').val();
+            var emailReg = /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/;
+            if ($('#registration-password').val().length < 6 || !emailReg.test(emil)) {
+                alert("Invalid email or password.");
+                return false;
+            }
+        });
+    });
+</script>
 <div class="registerPane">
     <div class="register-form">
         <div>
@@ -16,14 +53,16 @@
                     </tr>
                     <tr>
                         <td><label for="email">Email</label></td>
-                        <td><input id="email" class="glowing-border" type="email" name="email"/></td>
+                        <td><input id="registration-emailid" class="glowing-border" type="email" name="email"/></td>
+                        <td><span id="registration-email_message"></span></td>
                     </tr>
                     <tr>
                         <td><label for="email">Password</label></td>
-                        <td><input id="password" class="glowing-border" type="password" name="password"/></td>
+                        <td><input id="registration-password" class="glowing-border" type="password" name="password"/></td>
+                        <td><span id="registration-pass_message"></span></td>
                     </tr>
                     <tr>
-                        <td colspan="2"><input type="submit" value="Sign Up" /></td>
+                        <td colspan="2"><input id="registration-submit" type="submit" value="Sign Up" /></td>
                     </tr>
                 </tbody>
             </table>

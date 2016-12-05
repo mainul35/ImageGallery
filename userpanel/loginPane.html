@@ -1,7 +1,7 @@
 <script type="text/javascript">
     $(document).ready(function () {
 
-        $('#emailid').focusout(function () {
+        var invalidEmail = $('#emailid').focusout(function () {
 //            alert("Invalid email");
             $('#emailid').filter(function () {
                 var emil = $('#emailid').val();
@@ -9,25 +9,37 @@
                 if (!emailReg.test(emil)) {
                     $('#emailid').addClass("glowing-border-error");
                     $('#email_message').text("Invalid Email");
+                    return true;
                 } else {
                     $('#emailid').removeClass("glowing-border-error");
                     $('#email_message').text("");
+                    return false;
                 }
             })
         });
-    });
 
-    $(document).ready(function () {
-        $('#password').focusout(function () {
+        var invalidPassword = $('#password').focusout(function () {
             if ($('#password').val().length < 6) {
                 $('#pass_message').text("Password length is too short.");
                 $('#password').addClass("glowing-border-error");
+                return true;
             } else if ($('#password').val().length > 5) {
                 $('#pass_message').text("");
                 $('#password').removeClass("glowing-border-error");
+                return false;
+            }
+        });
+    
+        $('#submit').click(function (){
+            var emil = $('#emailid').val();
+            var emailReg = /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/;
+            if($('#password').val().length < 6 || !emailReg.test(emil)){
+                alert("Invalid email or password.");
+                return false;
             }
         });
     });
+    
 
 </script>
 <div class="loginPane">
@@ -49,7 +61,7 @@
                         <td><span id="pass_message"></span></td>
                     </tr>
                     <tr>
-                        <td colspan="2"><input type="submit" value="Log in" /></td>
+                        <td colspan="2"><input id="submit" type="submit" value="Log in" /></td>
                         <td><a id="pasword_reset" href="./userpanel/reset.php">Reset password</a></td>
                     </tr>
                 </tbody>
