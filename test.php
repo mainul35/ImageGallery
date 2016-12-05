@@ -37,6 +37,7 @@ while($rows = mysqli_fetch_assoc($result)){
             document.write(fittingName + "<br>");
             document.write(fittingTypeId + "<br>");
             document.write(fittingUnitCost + "<br>");
+            alert('<?php echo 2; ?>');
 //        }
     </script>
 </div>
