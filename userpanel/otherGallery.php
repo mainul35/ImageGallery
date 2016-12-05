@@ -3,46 +3,15 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="../css/style.css" type="text/css"/>
-
-    <style>
-        .imgContainer{
-            width: 235px;
-            height: 290px;
-            margin: 10px;
-            border: 1px solid #ccc;
-            border-radius: 8px;
-        }
-        .row{
-            margin-left: 120px;
-        }
-
-        .all-uploads{
-            width: 165px;
-            height: 165px;
-            margin-left: 3vh;
-            margin-top: 5vh;
-            border-radius: 4px;
-        }
-
-        .all-uploads-inf{
-            line-height: -2px;
-            margin-left: 3vh;
-        }
-
-        .divider{
-            margin-left: 1vh;
-        }
-    </style>
-
 </head>
 <?php
 include_once '../model/user.php';
 include_once './header.php';
 include_once '../controller/GalleryDAO.php';
-
 session_start();
-if (isset($_SESSION["user"])) {
-    $user = $_SESSION['user'];
+if (isset($_GET['userId'])) {
+    mysqli_select_db($con, 'imagegallery');
+    $id = mysqli_real_escape_string($con, $_GET['userId']);
     checkLogin(true, $_SESSION['name']);
     $gallery = new ImageDao($con);
     $pageNo = 0;
@@ -51,10 +20,11 @@ if (isset($_SESSION["user"])) {
     }
     ?>
     <div class="container-fluid">
+        <h2><?php echo 'Gallery of '.$_SESSION['otherUser'];?></h2>
         <div class="row">
             <script>
                 $(document).ready(function () {
-                    var phpData = '<?php echo json_encode($gallery->fetchImages(0, $user->getId())); ?>';
+                    var phpData = '<?php echo json_encode($gallery->fetchImages(0, $id)); ?>';
                     var parseJSON = jQuery.parseJSON(phpData);
                     var content = "";
                     for (var i = 0; i < parseJSON.length; i++) {
@@ -65,7 +35,7 @@ if (isset($_SESSION["user"])) {
                         content += "<span class='all-uploads-inf'>" + parseJSON[i].imageName + "</span><br>";
                         content += "<span class='all-uploads-inf'>Uploaded on " + splittedTime[0] + " </span><br><span class='all-uploads-inf'>At " + splittedTime[1] + "</span><br>";
                         content += "<span class='all-uploads-inf'>" + parseJSON[i].imageVotes + " votes</span><span class='divider'>|</span>";
-                        content += "<span class='all-uploads-inf divider'><a href='upvote.php?page=owngallery.php&imageId=" + parseJSON[i].imageId + "'>Upvote</a></span></div>";
+                        content += "<span class='all-uploads-inf divider'><a href='upvote.php?page=otherGallery.php&imageId=" + parseJSON[i].imageId + "'>Upvote</a></span></div>";
                         $("div.row").html(content);
                     }
                 });
@@ -73,15 +43,16 @@ if (isset($_SESSION["user"])) {
         </div>
     </div><br>
     <ul class="pagination">
-    <?php
-    for ($i = 1; $i < ceil($gallery->countTotalPages()) + 1; $i++) {
-        echo '<li><a id="pagination' . $i . '" href="owngallery.php?pageNo=' . $i . '">' . $i . '</a></li>';
-    }
-    ?>
-    </ul>
         <?php
-    } else {
-        header("location: ../index.php");
-        mysqli_close($con);
-    }
-    ?>
+        for ($i = 1; $i < ceil($gallery->countTotalPages()) + 1; $i++) {
+            echo '<li><a id="pagination' . $i . '" href="otherGallery.php?pageNo=' . $i . '">' . $i . '</a></li>';
+        }
+        ?>
+    </ul>
+    <?php
+} else {
+    header("location: ../index.php");
+    mysqli_close($con);
+}
+?>
+

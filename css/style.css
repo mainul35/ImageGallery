@@ -207,3 +207,32 @@ input[type="submit"]{
     margin-right: auto;
     margin-left: 180px;
 }
+
+/*Home, owngallery, othergallery*/
+.imgContainer{
+    width: 235px;
+    height: 310px;
+    margin: 10px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+}
+.row{
+    margin-left: 120px;
+}
+
+.all-uploads{
+    width: 165px;
+    height: 165px;
+    margin-left: 3vh;
+    margin-top: 5vh;
+    border-radius: 4px;
+}
+
+.all-uploads-inf{
+    line-height: -2px;
+    margin-left: 3vh;
+}
+
+.divider{
+    margin-left: 1vh;
+}

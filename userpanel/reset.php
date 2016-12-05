@@ -34,8 +34,7 @@
 if (isset($_POST['email'])) {
     $email = $_POST['email'];
     $password = $_POST['password'];
-
-
+    
     require_once '../PHPMailer/PHPMailerAutoload.php';
     $mail = new PHPMailer();
     $mail->isSMTP();                                      // Set mailer to use SMTP

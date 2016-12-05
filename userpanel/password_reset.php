@@ -43,5 +43,7 @@ if(isset($_POST['password'])){
         $sql = "UPDATE `user` SET `password`=".md5($password)." WHERE `email`=".$_SESSION['email'];
         mysqli_query($con, $sql);
         echo 'Your password has been reset. <br>Please click <a href = "http://127.0.0.1/ImageGallery/index.php">This link </a> to log in.';
+        session_unset();
     }
 }
+mysqli_close($con);

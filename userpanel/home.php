@@ -4,10 +4,10 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="../css/style.css" type="text/css"/>
 
-    <style>
+<!--    <style>
         .imgContainer{
             width: 235px;
-            height: 290px;
+            height: 310px;
             margin: 10px;
             border: 1px solid #ccc;
             border-radius: 8px;
@@ -32,7 +32,7 @@
         .divider{
             margin-left: 1vh;
         }
-    </style>
+    </style>-->
 
 </head>
 <?php
@@ -44,42 +44,41 @@ session_start();
 if (isset($_SESSION["user"])) {
     $user = $_SESSION['user'];
     $_SESSION['myId'] = $user->getId();
-    $name = $user->getFName()." ".$user->getLName();
+    $name = $user->getFName() . " " . $user->getLName();
     $_SESSION['name'] = $name;
     checkLogin(true, $name);
-    
+
     $gallery = new ImageDao($con);
     $pageNo = 0;
     if (isset($_GET['pageNo'])) {
         $pageNo = $_GET['pageNo'];
     }
-
-    /*
-     * To change this license header, choose License Headers in Project Properties.
-     * To change this template file, choose Tools | Templates
-     * and open the template in the editor.
-     */
-
-//    echo json_encode($gallery->fetchImages(0, "*"));
     ?>
     <div class="container-fluid">
         <div class="row">
             <script>
                 $(document).ready(function () {
-                    var phpData = '<?php echo json_encode($gallery->fetchImages(0, "*"));?>';
-                    
+                    var phpData = '<?php echo json_encode($gallery->fetchImages(0, "*")); ?>';
+
                     var parseJSON = jQuery.parseJSON(phpData);
-                    //                    document.write(parseJSON[0].imageName);
-                    //                    document.write(parseJSON[1].imageName);
-                    //                    document.write(parseJSON[2].imageName);
-                    //                $("div.row").html("<div class='imgContainer col-sm-1' style='background-color:lavender;'></div>");
                     var content = "";
                     for (var i = 0; i < parseJSON.length; i++) {
-//                        alert(parseJSON[i].imageName);
+                        //                        alert(parseJSON[i].imageName);
                         var str = (parseJSON[i].imageUploafdTime);
                         var splittedTime = str.split(" ");
                         content += "<div class='imgContainer col-sm-1' style='background-color:lavender;'>";
+
                         content += "<a href='" + parseJSON[i].imageURL + "'><img class='all-uploads' src='" + parseJSON[i].imageURL + "'/></a><br>";
+                        content += "<span class='all-uploads-inf'><a href='./otherGallery.php?userId=" + parseJSON[i].userId + "'>";
+                        var fullName = '<?php
+    $sql = "SELECT `fName`, `lName` FROM `user` WHERE `id` = 1;";
+    $result = mysqli_query($con, $sql);
+    $row = mysqli_fetch_assoc($result);
+    $otherUser = $row['fName'] . " " . $row['lName'];
+    $_SESSION['otherUser'] = $otherUser;
+    echo $otherUser;
+    ?>';
+                        content += fullName + "</a></span><br>";
                         content += "<span class='all-uploads-inf'>" + parseJSON[i].imageName + "</span><br>";
                         content += "<span class='all-uploads-inf'>Uploaded on " + splittedTime[0] + " </span><br><span class='all-uploads-inf'>At " + splittedTime[1] + "</span><br>";
                         content += "<span class='all-uploads-inf'>" + parseJSON[i].imageVotes + " votes</span><span class='divider'>|</span>";
@@ -91,15 +90,15 @@ if (isset($_SESSION["user"])) {
         </div>
     </div><br>
     <ul class="pagination">
-    <?php
-    for ($i = 1; $i < ceil($gallery->countTotalPages()) + 1; $i++) {
-        echo '<li><a id="pagination' . $i . '" href="home.php?pageNo=' . $i . '">' . $i . '</a></li>';
-    }
-    ?>
-    </ul>
         <?php
-    } else {
-        header("location: ../index.php");
-        mysqli_close($con);
-    }
-    ?>
+        for ($i = 1; $i < ceil($gallery->countTotalPages()) + 1; $i++) {
+            echo '<li><a id="pagination' . $i . '" href="home.php?pageNo=' . $i . '">' . $i . '</a></li>';
+        }
+        ?>
+    </ul>
+    <?php
+} else {
+    header("location: ../index.php");
+    mysqli_close($con);
+}
+?>
