@@ -9,9 +9,10 @@ include_once '../model/user.php';
 include_once './header.php';
 include_once '../controller/GalleryDAO.php';
 session_start();
-if (isset($_GET['userId'])) {
+if (isset($_SERVER['REQUEST_METHOD']) == 'GET') {
     mysqli_select_db($con, 'imagegallery');
-    $id = mysqli_real_escape_string($con, $_GET['userId']);
+    $name = mysqli_real_escape_string($con, $_GET['name']);
+    $id = mysqli_real_escape_string($con, $_GET['id']);
     checkLogin(true, $_SESSION['name']);
     $gallery = new ImageDao($con);
     $pageNo = 0;
@@ -20,11 +21,11 @@ if (isset($_GET['userId'])) {
     }
     ?>
     <div class="container-fluid">
-        <h2><?php echo 'Gallery of '.$_SESSION['otherUser'];?></h2>
+        <h2><?php echo 'Gallery of '.$name;?></h2>
         <div class="row">
             <script>
                 $(document).ready(function () {
-                    var phpData = '<?php echo json_encode($gallery->fetchImages(0, $id)); ?>';
+                    var phpData = '<?php echo json_encode($gallery->fetchImages($pageNo, $id)); ?>';
                     var parseJSON = jQuery.parseJSON(phpData);
                     var content = "";
                     for (var i = 0; i < parseJSON.length; i++) {
@@ -35,7 +36,7 @@ if (isset($_GET['userId'])) {
                         content += "<span class='all-uploads-inf'>" + parseJSON[i].imageName + "</span><br>";
                         content += "<span class='all-uploads-inf'>Uploaded on " + splittedTime[0] + " </span><br><span class='all-uploads-inf'>At " + splittedTime[1] + "</span><br>";
                         content += "<span class='all-uploads-inf'>" + parseJSON[i].imageVotes + " votes</span><span class='divider'>|</span>";
-                        content += "<span class='all-uploads-inf divider'><a href='upvote.php?page=otherGallery.php&imageId=" + parseJSON[i].imageId + "'>Upvote</a></span></div>";
+                        content += "<span class='all-uploads-inf divider'><a href='upvote.php?name="+parseJSON[i].fName+"page=otherGallery.php&imageId=" + parseJSON[i].imageId + "'>Upvote</a></span></div>";
                         $("div.row").html(content);
                     }
                 });

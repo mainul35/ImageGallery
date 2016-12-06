@@ -21,9 +21,9 @@ class ImageDao {
     function fetchImages($index, $userId) {
 
         if ($userId == "*") {
-            $sql = "SELECT * FROM `image` ORDER BY imageUploafdTime DESC LIMIT 20 OFFSET " . ($index * 10) . ";";
+            $sql = "SELECT * FROM `image`, `user` WHERE `image`.`userId` = `user`.`id` ORDER BY imageUploafdTime DESC LIMIT 20 OFFSET " . ($index * 10) . ";";
         } else {
-            $sql = "SELECT * FROM `image` WHERE `userId` = '" . $userId . "' ORDER BY imageUploafdTime DESC LIMIT 20 OFFSET " . $index . ";";
+            $sql = "SELECT * FROM `image`, `user` WHERE `image`.`userId` = `user`.`id` AND `userId` = '" . $userId . "' ORDER BY imageUploafdTime DESC LIMIT 20 OFFSET " . $index . ";";
         }
         $result = mysqli_query($this->con, $sql);
         $arrays;

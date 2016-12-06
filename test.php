@@ -9,36 +9,18 @@
  */
 
 include_once './db/connection.php';
-mysqli_select_db($con, "garciaplumbing2");
-
-$sql = "SELECT * FROM `fitting`;";
-$result = mysqli_query($con, $sql);
-
-//$script = <<<SCRIPT
-//
-//SCRIPT;
-echo 'asdf';
-while($rows = mysqli_fetch_assoc($result)){
-//echo json_en code($rows);
+mysqli_select_db($con, "imagegallery");
 ?>
-<div>
-    <script type="text/javascript">
-//        function fitting() {
-//            fittingId:"";
-//        }
-        var objData = '<?php echo json_encode($rows); ?>';
-        var jsonData = jQuery.parseJSON(objData);
-//        for (i = 0; i < objData.length; i++) {
-            var fittingId = jsonData.fittingId;
-            var fittingName = jsonData.fittingName;
-            var fittingUnitCost = jsonData.fittingUnitCost;
-            var fittingTypeId = jsonData.fittingTypeId;
-            document.write(fittingId + "<br>");
-            document.write(fittingName + "<br>");
-            document.write(fittingTypeId + "<br>");
-            document.write(fittingUnitCost + "<br>");
-            alert('<?php echo 2; ?>');
-//        }
-    </script>
-</div>
-<?php } ?>
+<script>
+    var fullName = '<?php
+$sql = "SELECT `fName`, `lName` FROM `user`, `image` WHERE `user`.`id` = `image`.`userId` ORDER BY `image`.`imageId` DESC";
+$result = mysqli_query($con, $sql);
+$i = 0;
+while ($row = mysqli_fetch_assoc($result)) {
+    $otherUser[$i++] = $row['fName'] . " " . $row['lName'];
+}
+echo json_encode($otherUser);
+?>';
+    var parseNames = jQuery.parseJSON(fullName);
+    document.write(parseNames);
+</script>

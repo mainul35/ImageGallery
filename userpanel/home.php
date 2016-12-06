@@ -58,7 +58,7 @@ if (isset($_SESSION["user"])) {
         <div class="row">
             <script>
                 $(document).ready(function () {
-                    var phpData = '<?php echo json_encode($gallery->fetchImages(0, "*")); ?>';
+                    var phpData = '<?php echo json_encode($gallery->fetchImages($pageNo, "*")); ?>';
 
                     var parseJSON = jQuery.parseJSON(phpData);
                     var content = "";
@@ -67,22 +67,13 @@ if (isset($_SESSION["user"])) {
                         var str = (parseJSON[i].imageUploafdTime);
                         var splittedTime = str.split(" ");
                         content += "<div class='imgContainer col-sm-1' style='background-color:lavender;'>";
-
                         content += "<a href='" + parseJSON[i].imageURL + "'><img class='all-uploads' src='" + parseJSON[i].imageURL + "'/></a><br>";
-                        content += "<span class='all-uploads-inf'><a href='./otherGallery.php?userId=" + parseJSON[i].userId + "'>";
-                        var fullName = '<?php
-    $sql = "SELECT `fName`, `lName` FROM `user` WHERE `id` = 1;";
-    $result = mysqli_query($con, $sql);
-    $row = mysqli_fetch_assoc($result);
-    $otherUser = $row['fName'] . " " . $row['lName'];
-    $_SESSION['otherUser'] = $otherUser;
-    echo $otherUser;
-    ?>';
-                        content += fullName + "</a></span><br>";
+                        content += "<span class='all-uploads-inf'><a href='./otherGallery.php?id="+parseJSON[i].userId+"&name=" + parseJSON[i].fName + "'>";
+                        content += parseJSON[i].fName + "</a></span><br>";
                         content += "<span class='all-uploads-inf'>" + parseJSON[i].imageName + "</span><br>";
                         content += "<span class='all-uploads-inf'>Uploaded on " + splittedTime[0] + " </span><br><span class='all-uploads-inf'>At " + splittedTime[1] + "</span><br>";
                         content += "<span class='all-uploads-inf'>" + parseJSON[i].imageVotes + " votes</span><span class='divider'>|</span>";
-                        content += "<span class='all-uploads-inf divider'><a href='upvote.php?page=home.php&imageId=" + parseJSON[i].imageId + "'>Upvote</a></span></div>";
+                        content += "<span class='all-uploads-inf divider'><a href='upvote.php?name=" + parseJSON[i].fName + "page=home.php&imageId=" + parseJSON[i].imageId + "'>Upvote</a></span></div>";
                         $("div.row").html(content);
                     }
                 });
