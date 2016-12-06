@@ -54,7 +54,7 @@ if (isset($_SESSION["user"])) {
         <div class="row">
             <script>
                 $(document).ready(function () {
-                    var phpData = '<?php echo json_encode($gallery->fetchImages(0, $user->getId())); ?>';
+                    var phpData = '<?php echo json_encode($gallery->fetchImages($pageNo, $user->getId())); ?>';
                     var parseJSON = jQuery.parseJSON(phpData);
                     var content = "";
                     for (var i = 0; i < parseJSON.length; i++) {
